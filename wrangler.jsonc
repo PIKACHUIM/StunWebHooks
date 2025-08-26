@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "stunwebhooks",
+  "name": "stunhook-work",
   "main": "src/index.ts",
   "compatibility_date": "2025-08-26",
    "compatibility_flags": [
