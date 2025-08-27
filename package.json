@@ -8,7 +8,9 @@
   },
   "dependencies": {
     "@types/node": "^24.3.0",
+    "@edgeone/ef-types": "^1.0.5",
     "hono": "^4.9.4",
+    "edgeone": "^1.0.27",
     "tencentcloud-sdk-nodejs-teo": "^4.1.99"
   },
   "devDependencies": {

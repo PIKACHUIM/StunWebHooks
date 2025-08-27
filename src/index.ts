@@ -1,14 +1,8 @@
 import {Context, Hono} from 'hono'
 import {updated} from './cloud/tencent'
-import {serveStatic} from 'hono/cloudflare-workers' // @ts-ignore
-import manifest from '__STATIC_CONTENT_MANIFEST'
 
-const app = new Hono()
+export const app = new Hono()
 
-app.use('/', async (c: Context) => {
-    return c.redirect("/index.html")
-});
-app.use("*", serveStatic({manifest: manifest, root: "./"}));
 app.post('/api/eo/zones/update',
     async (c: Context): Promise<any> => {
         // 获取参数 ========================================
