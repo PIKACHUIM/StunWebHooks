@@ -1,8 +1,14 @@
 import {Context, Hono} from 'hono'
 import {updated} from './cloud/tencent'
+import {serveStatic} from 'hono/cloudflare-workers' // @ts-ignore
+import manifest from '__STATIC_CONTENT_MANIFEST'
 
 const app = new Hono()
 
+app.use('/', async (c: Context) => {
+    return c.redirect("/index.html")
+});
+app.use("*", serveStatic({manifest: manifest, root: "./"}));
 app.post('/api/eo/zones/update',
     async (c: Context): Promise<any> => {
         // 获取参数 ========================================
@@ -33,8 +39,6 @@ app.post('/api/eo/zones/update',
             public_host, public_port,
             header_back, origin_back,
             enable_ipv6, enable_ssls,
-
-
         )
         return c.json(result, result.flag ? 200 : 500)
     })
