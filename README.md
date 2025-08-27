@@ -22,6 +22,18 @@
 
 ## 使用方式
 
+- ### 设置Lucky STUN穿透IP
+
+  - 安装Lucky：[gdy666/lucky](https://github.com/gdy666/lucky)
+
+  - 打开http://<运行设备IP>:16601
+
+    （默认账号: 666 默认密码: 666）
+
+  - 添加一个STUN端口转发，填写IP和端口信息
+
+  - 转发无误之后可以使用IP端口打开你的应用
+
 - ### Edgeone CDN 自动回源
 
   - #### Lucky Webhook 地址
