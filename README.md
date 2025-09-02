@@ -18,9 +18,20 @@
 - 本项目不对所提供的公共接口或其他任何使用本项目自建的接口承诺为用户所提供的任何信息的泄露风险进行任何保障。
 - 公共接口仅供演示所用，由于secret为敏感数据，建议所有用户自行部署使用，本项目不承担使用公共接口的一切后果。
 
+## 一键部署
+
+本工具已支持Cloudflare Worker、EdgeOne Functions国际站和国内站方式一键部署
+
+部署完成后请前往[EdgeOne Functions](https://console.tencentcloud.com/edgeone/pages)或[Cloudflare Worker](https://dash.cloudflare.com/)绑定自己的域名即可使用
+
+|                   Cloudflare Worker 全球站                   |                  EdgeOsne Functions 国际站                   |                   EdgeOne Functions 中国站                   |
+| :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
+| [<img src="https://deploy.workers.cloudflare.com/button" alt="Deploy to Cloudflare Workers" style="width:400px;heigh:200px" />](https://deploy.workers.cloudflare.com/?url=https://github.com/PIKACHUIM/StunWebHooks) | [<img src="https://cdnstatic.tencentcs.com/edgeone/pages/deploy.svg" alt="使用 EdgeOne Pages 部署" style="width:400px;heigh:200px" />](https://edgeone.ai/pages/new?project-name=StunWebHooks&repository-url=https://github.com/PIKACHUIM/StunWebHooks) | [<img src="https://cdnstatic.tencentcs.com/edgeone/pages/deploy.svg" alt="使用 EdgeOne Pages 部署" style="width:400px;heigh:200px" />](https://console.cloud.tencent.com/edgeone/pages/new?project-name=StunWebHooks&repository-url=https://github.com/PIKACHUIM/StunWebHooks) |
 
 
-## 使用方式
+## 主动穿透
+
+适用于有NAT1的无公网IP环境，且使用网页的应用协议
 
 - ### 设置Lucky STUN穿透IP
 
@@ -55,17 +66,13 @@
     }
     ```
 
+## 被动穿透
 
+需要客户端维持的穿透，类似于FRP，分为两种情况：
 
-## 一键部署
+1、只使用Web协议，此时只需要映射端使用客户端来穿透
+2、使用其他TCP协议的，需要映射端和访问端使用客户端
 
-本工具已支持Cloudflare Worker、EdgeOne Functions国际站和国内站方式一键部署
-
-部署完成后请前往[EdgeOne Functions](https://console.tencentcloud.com/edgeone/pages)或[Cloudflare Worker](https://dash.cloudflare.com/)绑定自己的域名即可使用
-
-|                   Cloudflare Worker 全球站                   |                  EdgeOsne Functions 国际站                   |                   EdgeOne Functions 中国站                   |
-| :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| [<img src="https://deploy.workers.cloudflare.com/button" alt="Deploy to Cloudflare Workers" style="width:400px;heigh:200px" />](https://deploy.workers.cloudflare.com/?url=https://github.com/PIKACHUIM/StunWebHooks) | [<img src="https://cdnstatic.tencentcs.com/edgeone/pages/deploy.svg" alt="使用 EdgeOne Pages 部署" style="width:400px;heigh:200px" />](https://edgeone.ai/pages/new?project-name=StunWebHooks&repository-url=https://github.com/PIKACHUIM/StunWebHooks) | [<img src="https://cdnstatic.tencentcs.com/edgeone/pages/deploy.svg" alt="使用 EdgeOne Pages 部署" style="width:400px;heigh:200px" />](https://console.cloud.tencent.com/edgeone/pages/new?project-name=StunWebHooks&repository-url=https://github.com/PIKACHUIM/StunWebHooks) |
 
 
 

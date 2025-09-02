@@ -7,11 +7,14 @@
     "cf-typegen": "wrangler types --env-interface CloudflareBindings"
   },
   "dependencies": {
-    "@types/node": "^24.3.0",
     "@edgeone/ef-types": "^1.0.5",
-    "hono": "^4.9.4",
+    "@types/node": "^24.3.0",
+    "@types/ws": "^8.18.1",
+    "cloudflare-workers": "^0.0.14",
     "edgeone": "^1.0.27",
-    "tencentcloud-sdk-nodejs-teo": "^4.1.99"
+    "hono": "^4.9.4",
+    "tencentcloud-sdk-nodejs-teo": "^4.1.99",
+    "ws": "^8.18.3"
   },
   "devDependencies": {
     "wrangler": "^4.4.0"
