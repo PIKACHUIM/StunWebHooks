@@ -7,10 +7,10 @@
     "deploy-js": "node dist/bundle.js",
     "dev-cf": "wrangler dev",
     "deploy-cf": "wrangler deploy --minify",
-    "cf-typegen": "wrangler types --env-interface CloudflareBindings",
     "dev-eo": "edgeone pages dev",
     "build-eo": "edgeone pages build",
-    "deploy-eo": "edgeone pages deploy ./ -n edgeone-hono-app -t "
+    "deploy-eo": "edgeone pages deploy ./ -n edgeone-hono-app -t ",
+    "cf-typegen": "wrangler types --env-interface CloudflareBindings"
   },
   "dependencies": {
     "@edgeone/ef-types": "^1.0.5",
@@ -18,25 +18,16 @@
     "@types/node": "^24.3.0",
     "cloudflare-workers": "^0.0.14",
     "dotenv": "^17.2.2",
-    "edgeone": "^1.0.27",
+    "edgeone": "^1.1.4",
     "hono": "^4.9.4",
     "tencentcloud-sdk-nodejs-teo": "^4.1.99"
   },
   "devDependencies": {
     "@types/node": "^20.11.17",
-    "assert": "^2.1.0",
-    "crypto-browserify": "^3.12.1",
     "esbuild": "^0.25.5",
-    "os-browserify": "^0.3.0",
-    "path-browserify": "^1.0.1",
-    "querystring-es3": "^0.2.1",
-    "stream-browserify": "^3.0.0",
-    "stream-http": "^3.2.0",
     "ts-loader": "^9.5.4",
     "tsx": "^4.7.1",
     "typescript": "^5.9.2",
-    "url": "^0.11.4",
-    "util": "^0.12.5",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4",
     "wrangler": "^4.4.0"
