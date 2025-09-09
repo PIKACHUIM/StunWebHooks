@@ -1,9 +1,6 @@
 import {Context, Hono} from 'hono'
 import {updated} from './cloud/tencent'
 import {cors} from "hono/cors";
-// import {tunnels} from "./wsfrp/tunnels";
-// import {pendingResponses} from "./wsfrp/library";
-// import {upgradeWebSocket} from 'hono/cloudflare-workers'
 export const app = new Hono()
 
 app.use('/*', cors());
