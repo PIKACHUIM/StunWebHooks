@@ -4,6 +4,9 @@
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy --minify",
+    "dev-eo": "edgeone pages dev",
+    "build-eo": "edgeone pages build",
+    "deploy-eo": "edgeone pages deploy ./ -n edgeone-hono-app -t ",
     "cf-typegen": "wrangler types --env-interface CloudflareBindings"
   },
   "dependencies": {
