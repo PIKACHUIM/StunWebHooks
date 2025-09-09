@@ -1,4 +1,6 @@
 {
+  "buildCommand": "edgeone pages build",
+  "installCommand": "npm install",
     "rewrites": [
         {
             "source": "/",
