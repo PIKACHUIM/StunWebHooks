@@ -42,7 +42,7 @@ export async function updated(
         "HttpOriginPort": parseInt(public_port),
         "IPv6Status": enable_ipv6
     };
-    console.log(params);
+    // console.log(params);
     return client.ModifyAccelerationDomain(params).then(
         (data: any): any => {
             // console.log(data);
