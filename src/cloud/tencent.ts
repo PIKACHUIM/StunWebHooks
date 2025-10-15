@@ -4,35 +4,35 @@ import {RequestBody} from "../param";
 const TeoClient: any = teo.teo.v20220901.Client;
 
 export class TencentCloud {
-    public parms: RequestBody;
+    public params: RequestBody;
 
     constructor(parms: RequestBody) {
-        this.parms = parms;
+        this.params = parms;
     }
 
-    async parma() {
+    async initial(): Promise<any> {
         return {
-            "ZoneId": this.parms.domain_uuid,
-            "DomainName": this.parms.domain_name,
+            "ZoneId": this.params.domain_uuid,
+            "DomainName": this.params.domain_name,
             "OriginInfo": {
                 "OriginType": "IP_DOMAIN",
-                "Origin": this.parms.public_host,
-                "HostHeader": this.parms.header_back,
-                "BackupOrigin": this.parms.origin_back
+                "Origin": this.params.public_host,
+                "HostHeader": this.params.header_back,
+                "BackupOrigin": this.params.origin_back
             },
             "OriginProtocol":
-                this.parms.enable_ssls == undefined ? null : (
-                    this.parms.enable_ssls ? "HTTPS" : "HTTP"),
-            "HttpOriginPort": parseInt(this.parms.public_port || ""),
-            "IPv6Status": this.parms.enable_ipv6
+                this.params.enable_ssls == undefined ? null : (
+                    this.params.enable_ssls ? "HTTPS" : "HTTP"),
+            "HttpOriginPort": parseInt(this.params.public_port || ""),
+            "IPv6Status": this.params.enable_ipv6
         };
     }
 
-    async configs() {
+    async configs(): Promise<any> {
         const config = {
             credential: {
-                secretId: this.parms.secret_uuid,
-                secretKey: this.parms.secret_keys,
+                secretId: this.params.secret_uuid,
+                secretKey: this.params.secret_keys,
             },
             region: "",
             profile: {
@@ -46,7 +46,7 @@ export class TencentCloud {
 
     async created(): Promise<Record<string, any>> {
         const client: any = await this.configs();
-        const params: any = await this.parma();
+        const params: any = await this.initial();
         return client.CreateAccelerationDomain(params).then(
             (data: any): any => {
                 return {done: "操作成功", uuid: data, flag: true};
@@ -62,7 +62,7 @@ export class TencentCloud {
 
     async updated(): Promise<Record<string, any>> {
         const client: any = await this.configs();
-        const params: any = await this.parma();
+        const params: any = await this.initial();
         // console.log(params);
         return client.ModifyAccelerationDomain(params).then(
             (data: any): any => {
@@ -82,8 +82,8 @@ export class TencentCloud {
     async deleted(): Promise<Record<string, any>> {
         const client: any = await this.configs();
         const params = {
-            "ZoneId": this.parms.domain_uuid,
-            "DomainNames": [this.parms.domain_name]
+            "ZoneId": this.params.domain_uuid,
+            "DomainNames": [this.params.domain_name]
         };
         return client.DeleteAccelerationDomains(params).then(
             (data: any): any => {
@@ -101,7 +101,7 @@ export class TencentCloud {
     async sourced(): Promise<Record<string, any>> {
         const client: any = await this.configs();
         const params = {
-            "ZoneId": this.parms.domain_uuid,
+            "ZoneId": this.params.domain_uuid,
         };
         return client.DescribeAccelerationDomains(params).then(
             (data: any): any => {
