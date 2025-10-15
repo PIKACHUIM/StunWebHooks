@@ -1,5 +1,19 @@
 import {Context} from "hono";
 
+export interface RequestBody {
+    secret_uuid?: string | null;
+    secret_keys?: string | null;
+    domain_uuid?: string | null;
+    domain_name?: string | null;
+    public_host?: string | null;
+    public_port?: string | null;
+    enable_ipv6?: string | null;
+    enable_ssls?: string | null;
+    header_back?: string | null;
+    origin_back?: string | null;
+}
+
+
 export async function getParam(c: Context, key: string): Promise<string | null> {
     if (c.req.method === 'POST') {
         const body = await c.req.text();
@@ -15,4 +29,21 @@ export async function getParam(c: Context, key: string): Promise<string | null> 
         }
     }
     return c.req.query(key) ?? null;
+}
+
+export async function allParam(c: Context): Promise<RequestBody> {
+    const body: RequestBody = {
+        secret_uuid: await getParam(c, 'secret_uuid'),
+        secret_keys: await getParam(c, 'secret_keys'),
+        domain_uuid: await getParam(c, 'domain_uuid'),
+        domain_name: await getParam(c, 'domain_name'),
+        public_host: await getParam(c, 'public_host'),
+        public_port: await getParam(c, 'public_port'),
+        enable_ipv6: await getParam(c, 'enable_ipv6'),
+        enable_ssls: await getParam(c, 'enable_ssls'),
+        header_back: await getParam(c, 'header_back'),
+        origin_back: await getParam(c, 'origin_back'),
+    }
+    console.log(body)
+    return body
 }

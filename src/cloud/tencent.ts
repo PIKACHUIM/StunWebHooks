@@ -7,12 +7,10 @@ export async function updated(
     secret_uuid: string, secret_keys: string, // 鉴权信息
     domain_uuid: string, domain_name: string, // 域名信息
     public_host: string, public_port: string, // 访问地址
-    header_back: string | null, // 回源域名
-    origin_back: string | null, // 回源备用
+    header_back: string | null | undefined, // 回源域名
+    origin_back: string | null | undefined, // 回源备用
     enable_ipv6: any = null, // 已启用IPV6?
     enable_ssls: any = null, // 已启用SSL3?
-
-
 ): Promise<Record<string, any>> {
     const clientConfig = {
         credential: {
