@@ -3,7 +3,7 @@ import OpenApi, * as $OpenApi from "@alicloud/openapi-client";
 import Util, * as $Util from "@alicloud/tea-util";
 import { RequestBody } from "../param";
 
-export class AliyunCloud {
+export class AlibabaCloud {
   public parms: RequestBody;
 
   constructor(parms: RequestBody) {

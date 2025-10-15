@@ -1,9 +1,11 @@
 import {Context} from "hono";
 import {allParam, RequestBody} from "../param";
 import {TencentCloud} from "../cloud/tencent";
+import {AlibabaCloud} from "../cloud/aliyuns";
 
 const map: Record<string, any> = {
     "eo": TencentCloud,
+    "al": AlibabaCloud,
 }
 
 export class Zones {
@@ -15,11 +17,11 @@ export class Zones {
     constructor(c: Context, i: string) {
         this.c = c
         this.i = i
-        this.f = map[this.i]
     }
 
     async initial(): Promise<void> {
         this.p = await allParam(this.c)
+        this.f = new map[this.i](this.p)
     }
 
     async checkAll(all: boolean = true): Promise<boolean> {

@@ -17,7 +17,7 @@ export interface RequestBody {
 export async function getParam(c: Context, key: string): Promise<string | null> {
     if (c.req.method === 'POST') {
         const body = await c.req.text();
-        console.log(c.req.method, body)
+        // console.log(c.req.method, body)
         try {
             if (body) {
                 const jsonBody = JSON.parse(body);
@@ -45,6 +45,6 @@ export async function allParam(c: Context): Promise<RequestBody> {
         header_back: await getParam(c, 'header_back'),
         origin_back: await getParam(c, 'origin_back'),
     }
-    console.log(body)
+    // console.log(body)
     return body
 }
