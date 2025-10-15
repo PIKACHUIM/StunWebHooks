@@ -14,6 +14,9 @@
     "cf-typegen": "wrangler types --env-interface CloudflareBindings"
   },
   "dependencies": {
+    "@alicloud/esa20240910": "^2.34.1",
+    "@alicloud/openapi-client": "^0.4.15",
+    "@alicloud/tea-util": "^1.4.10",
     "@edgeone/ef-types": "^1.0.5",
     "@hono/node-server": "^1.15.0",
     "@types/node": "^24.3.0",

@@ -1,22 +1,65 @@
 import {Context} from "hono";
 import {allParam, RequestBody} from "../param";
-import {updated as eo_updated} from "../cloud/tencent";
+import {TencentCloud} from "../cloud/tencent";
 
 const map: Record<string, any> = {
-    'eo': eo_updated,
+    "eo": TencentCloud,
 }
 
-export async function updated(c: Context, i: string): Promise<Response> {
-    const p: RequestBody = await allParam(c)
-    // 检查参数 ==========================================================
-    if (!p.secret_uuid || !p.secret_keys || !p.domain_name ||
-        !p.domain_uuid || !p.public_host || !p.public_port)
-        return c.json({text: '参数错误'}, 400)
-    // 更新信息 ==========================================================
-    const result: Record<string, any> = await map[i](
-        p.secret_uuid, p.secret_keys, p.domain_uuid, p.domain_name,
-        p.public_host, p.public_port, p.header_back, p.origin_back,
-        p.enable_ipv6, p.enable_ssls,
-    )
-    return c.json(result, result.flag ? 200 : 500)
+export class Zones {
+    public c: Context
+    public i: string
+    public p: RequestBody | undefined
+    public f: any
+
+    constructor(c: Context, i: string) {
+        this.c = c
+        this.i = i
+        this.f = map[this.i]
+    }
+
+    async initial(): Promise<void> {
+        this.p = await allParam(this.c)
+    }
+
+    async checkAll(all: boolean = true): Promise<boolean> {
+        if (!this.p) return false
+        // 检查参数 ==========================================================
+        if (!this.p.secret_uuid || !this.p.secret_keys ||
+            !this.p.domain_name || !this.p.domain_uuid) return false
+        return !(all && (!this.p.public_host || !this.p.public_port));
+    }
+
+    async updated(): Promise<Response> {
+        if (!(await this.checkAll()))
+            return this.c.json({text: '参数错误'}, 400)
+        // 更新信息 ==========================================================
+        const result: Record<string, any> = await this.f.updated(this.p)
+        return this.c.json(result, result.flag ? 200 : 500)
+    }
+
+    async created(): Promise<Response> {
+        if (!(await this.checkAll()))
+            return this.c.json({text: '参数错误'}, 400)
+        // 创建信息 ==========================================================
+        const result: Record<string, any> = await this.f.created(this.p)
+        return this.c.json(result, result.flag ? 200 : 500)
+    }
+
+    async deleted(): Promise<Response> {
+        if (!(await this.checkAll(false)))
+            return this.c.json({text: '参数错误'}, 400)
+        // 删除信息 ==========================================================
+        const result: Record<string, any> = await this.f.deleted(this.p)
+        return this.c.json(result, result.flag ? 200 : 500)
+    }
+
+    async sourced(): Promise<Response> {
+        if (!(await this.checkAll(false)))
+            return this.c.json({text: '参数错误'}, 400)
+        // 获取信息 ==========================================================
+        const result: Record<string, any> = await this.f.sourced(this.p)
+        return this.c.json(result, result.flag ? 200 : 500)
+    }
+
 }

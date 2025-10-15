@@ -13,7 +13,7 @@ export interface RequestBody {
     origin_back?: string | null;
 }
 
-
+// 获取单个参数 ==========================================================================
 export async function getParam(c: Context, key: string): Promise<string | null> {
     if (c.req.method === 'POST') {
         const body = await c.req.text();
@@ -31,6 +31,7 @@ export async function getParam(c: Context, key: string): Promise<string | null> 
     return c.req.query(key) ?? null;
 }
 
+// 获取所有参数 ==========================================================================
 export async function allParam(c: Context): Promise<RequestBody> {
     const body: RequestBody = {
         secret_uuid: await getParam(c, 'secret_uuid'),
