@@ -22,7 +22,7 @@
     "@types/node": "^24.3.0",
     "cloudflare-workers": "^0.0.14",
     "dotenv": "^17.2.2",
-    "edgeone": "^1.1.17",
+    "edgeone": "^1.1.18",
     "hono": "^4.9.4",
     "tencentcloud-sdk-nodejs-teo": "^4.1.99"
   },
